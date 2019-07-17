@@ -25,17 +25,9 @@ del df['week']
 df = df.rename({'date': 'Date', 'value': 'Weight', 'appleExerciseTime': 'ExerciseTime',
                 'activeEnergyBurned': 'Calories'}, axis=1)
 df['ExerciseTime'] = df.ExerciseTime.astype('int')
-ExerciseTimeLevel = df.ExerciseTime.values
-for i in range(len(ExerciseTimeLevel)):
-    if ExerciseTimeLevel[i] <= 250:
-        ExerciseTimeLevel[i] = 250
-    elif  250 < ExerciseTimeLevel[i] <= 500:
-        ExerciseTimeLevel[i] = 500
-    elif 500 < ExerciseTimeLevel[i] <=750:
-        ExerciseTimeLevel[i] = 750
-    else:
-        ExerciseTimeLevel[i] = 1000
-df['ExerciseTimeLevel'] = ExerciseTimeLevel
+df['ExerciseTimeLevel'] = pd.cut(df.ExerciseTime, bins=[0, 250, 500, 750, 1000, 1250, 1500, 1750, 2000], right=False,
+                                 labels=['0 ~ 250', '250 ~ 500', '500 ~ 750', '750 ~ 1000',
+                                         '1000 ~ 1250', '1250 ~ 1500', '1500 ~ 1750', '1750 ~ 2000'])
 df.to_csv('myweight.csv', index=False)
 print('Output completed!')
 # # plot
