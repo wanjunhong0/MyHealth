@@ -10,10 +10,10 @@ myweight <- read_csv("myweight.csv", col_types = cols(Date = col_datetime(format
 # ploting 
 ```{r}
 (ggplot(myweight, aes(Date, Weight)) 
-+ geom_point(aes(color=Calories, shape=ExerciseTimeLevel)) 
-+ geom_smooth(method='loess', span=0.2) 
++ geom_point(aes(color=Calories, size=ExerciseTime)) 
++ geom_smooth(method='loess', span=0.2)
 + scale_color_viridis('Weekly Calories', option='plasma') 
-+ scale_shape(name='Weekly ExerciseTime(mins)') 
++ scale_size(name='Weekly ExerciseTime(mins)') 
 + theme(legend.position = c(0.85, 0.7), legend.background = element_rect(fill=alpha('grey', 0))) + ylab('Weight(kg)') + labs(title='BodyMass') 
 + scale_y_continuous(breaks=seq(round(min(myweight$Weight), 0), round(max(myweight$Weight), 0) + 1, 1)) 
 + scale_x_datetime(date_breaks = 'month'))
